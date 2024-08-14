@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="src/favicon.ico">
+    <title>抽奖日志</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/4.16.13/antd.min.css" >
+</head>
+<body>
+    <div class="log-container">
+        <h1>抽奖日志</h1>
+        <table id="logTable">
+            <thead>
+                <tr>
+                    <th>日期</th>
+                    <th>时间</th>
+                    <th>奖项</th>
+                </tr>
+            </thead>
+            <tbody id="logContent"></tbody>
+        </table>
+        <div id="pagination" class="pagination"></div>
+        <button onClick="clearLogs()">清除日志</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/antd/4.16.13/antd.min.js"></script>
+    <script>
+        const itemsPerPage = 10;
+        let currentPage = 1;
+
+        // 加载日志并分页显示
+        function loadLogs(page = 1, pageSize = itemsPerPage) {
+            const logContent = document.getElementById('logContent');
+            const logs = JSON.parse(localStorage.getItem('prizeLog')) || [];
+            logContent.innerHTML = '';
+
+            // 按时间倒序排列
+            logs.sort((a, b) => new Date(b.time) - new Date(a.time));
+
+            // 分页
+            const startIndex = (page - 1) * pageSize;
+            const endIndex = Math.min(startIndex + pageSize, logs.length);
+            const paginatedLogs = logs.slice(startIndex, endIndex);
+
+            paginatedLogs.forEach(log => {
+                const date = new Date(log.time);
+                const dateString = date.toLocaleDateString();
+                const timeString = date.toLocaleTimeString();
+                const logEntry = document.createElement('tr');
+                logEntry.innerHTML = `
+                    <td>${dateString}</td>
+                    <td>${timeString}</td>
+                    <td>${log.prize}</td>
+                `;
+                logContent.appendChild(logEntry);
+            });
+
+            // 更新分页
+            updatePagination(logs.length, page, pageSize);
+        }
+
+        // 更新分页组件
+        function updatePagination(totalItems, currentPage, pageSize) {
+            const pagination = document.getElementById('pagination');
+            pagination.innerHTML = '';
+
+            ReactDOM.render(
+                React.createElement(
+                    antd.Pagination,
+                    {
+                        current: currentPage,
+                        total: totalItems,
+                        pageSize: pageSize,
+                        showSizeChanger: true,
+                        showQuickJumper: true,
+                        onChange: (page, pageSize) => {
+                            currentPage = page;
+                            loadLogs(page, pageSize);
+                        },
+                        showTotal: (total) => `共 ${total} 条记录`,
+                    }
+                ),
+                pagination
+            );
+        }
+
+        // 清除日志
+        function clearLogs() {
+            localStorage.removeItem('prizeLog');
+            loadLogs();
+        }
+
+        // 初始加载日志
+        loadLogs();
+    </script>
+</body>
+</html>

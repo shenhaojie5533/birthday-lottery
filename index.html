@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no,email=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <link rel="stylesheet" href="css/layout.css"/>
+
+    <link rel="shortcut icon" href="src/favicon.ico">
+    <title>幸运大抽奖</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container" id="introContainer1">
+        <img id="avatar" src="src/avatar.jpg" alt="头像">
+        <div id="message">
+            <p id="line1"></p>
+        </div>
+    </div>
+    
+    <div class="container" id="introContainer2">
+        <div id="message">
+            <p id="line2"></p>
+        </div>
+    </div>
+    
+    <div class="container" id="introContainer3">
+        <div id="message">
+            <p id="line3"></p>
+        </div>
+    </div>
+
+    <div class="animation-container" id="animationContainer"></div>
+
+    <div class="wheel-container" id="wheelContainer">
+        <div id="wrapper" class="fw oh">
+            <div class="lottery_txt tc">
+                <strong class="fd dy05">剩余抽奖机会：<span id="lottery_num">3</span>次</strong>
+               <!-- <p class="fd dy08">每个用户每天可免费获得 3 次抽奖机会</p>-->
+            </div>
+            <div class="lottery_box fd dy05">
+                <div class="lottery_turntable pr">
+                    <div class="turntable fw"></div>
+                    <canvas id="lotterys" width="300" height="300"></canvas>
+                    <div id="go" class="fd dy05"></div>
+                </div>
+            </div>
+            <div class="lottery_btns oh">
+                <a href="javascript:;" id="btn1" class="btn fl tl fd dy05"></a>
+                <a href="javascript:;" id="btn2" class="btn fr tr fd dy05"></a>
+            </div>
+        </div>
+
+        <!--popover-->
+        <div class="popover fw pf dn">
+            <!--活动规则-->
+            <div class="modal m1">
+                <h2 id="rule" class="modal_title tc">活动规则</h2>
+                <p>1. 活动时间：2024年08月15日-2024年08月16日 </p>
+                <p>2. 活动期间，通过活动专题页面参与线上大转盘抽奖；</p>
+                <p>3. 该活动仅限张倩姣一人参与；</p>
+                <p>4. 该活动抽奖次数为0或奖品抽完时结束。</p>
+                <a href="javascript:;" class="close_btn"></a>
+            </div>
+            <!--我的中奖记录--->
+            <div class="modal m2">
+                <h2 class="modal_title tc">我的中奖记录</h2>
+                <ul class="lottery_records"></ul>
+                <a href="javascript:;" class="close_btn"></a>
+            </div>
+            <!--多抽--->
+            <div class="modal m3">
+                <p><img class="sorry" width="100%" src="img/sorry.png" /></p>
+                <p class="tip_txt">抽奖次数已用完～</p>
+                <p id="finish">讨好老公可增加3次机会哦！</p>
+                <a href="javascript:;" class="close_btn"></a>
+            </div>
+            <!--很遗憾--->
+            <div class="modal m4">
+                <p><img class="sorry" width="100%" src="img/sorry.png" /></p>
+                <p class="tip_txt">很遗憾你没有中奖</p>
+                <p class="tip_info">再接再厉哦～</p>
+                <a href="javascript:;" class="close_btn"></a>
+            </div>
+            <!--恭喜您中奖啦--->
+            <div class="modal m5">
+                <p><img class="ok" width="100%" src="img/ok.png" /></p>
+                <p class="tip_txt">恭喜你中了<font color="#fb4727">一等奖</font>哦！</p>
+                <p class="tip_gift"></p>
+                <a href="javascript:;" id="receives_btn" class="modal_btns"></a>
+                <p class="tip_info">注：奖品请找老公领取。</p>
+                <a href="javascript:;" class="close_btn"></a>
+            </div>
+           <!-- &lt;!&ndash;分享提示-&ndash;&gt;
+            <div class="modal m6">
+                <p class="share_arrow tr"><img width="100%" src="img/share_arrow.png"/></p>
+                <p>每日首次分享，可多获一次抽奖机会哦</p>
+                <p>快去分享吧 !</p>
+            </div>-->
+        </div>
+        <!--<h1>幸运大抽奖</h1>
+        <div id="my-lucky"></div>
+        <button id="startButton" onclick="startGame()">开始抽奖</button> &lt;!&ndash; 确保点击按钮时调用 startGame 函数 &ndash;&gt;
+        <div id="prizeMapping"></div>-->
+    </div>
+
+    <script src="js/zepto.min.js"></script>
+    <script src="js/zepto.rotate.min.js"></script>
+    <script src="js/lottery.js"></script>
+<!--    <script src="https://unpkg.com/lucky-canvas@1.7.25"></script>-->
+    <script src="config.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>

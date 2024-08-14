@@ -1,0 +1,290 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(to right, #a8edea, #fed6e3);
+    font-family: 'Arial', sans-serif;
+    font-size: 15px;
+    overflow: auto; /* 允许滚动，确保内容可以完全展示 */
+    padding: 20px 20px 20vh 20px; /* 添加安全边距 */
+    box-sizing: border-box; /* 确保padding不会影响整体布局 */
+}
+
+.container, .wheel-container, .animation-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    width: 100%;
+    max-width: 600px;
+    box-sizing: border-box;
+}
+
+.wheel-container, .animation-container {
+    display: none;
+}
+
+.active {
+    opacity: 1;
+}
+
+h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+#message {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 15px;
+    color: #333;
+}
+
+.highlight {
+    font-weight: bold;
+    color: #FF6F61;
+}
+
+#my-lucky {
+    border: 10px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    max-width: 90vw;
+    max-height: 90vh;
+    background: linear-gradient(to right, #a8edea, #fed6e3);
+}
+
+#startButton {
+    margin-top: 20px;
+    padding: 15px 30px;
+    font-size: 15px;
+    color: #fff;
+    background-color: #FF6F61;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 5px #e55b50;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+#startButton:hover {
+    background-color: #ff856e;
+}
+
+#startButton:active {
+    box-shadow: 0 2px #e55b50;
+    transform: translateY(3px);
+}
+
+.falling-emojis {
+    position: fixed;
+    top: -50px;
+    font-size: 30px;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
+
+#prizeMapping {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #333;
+    text-align: left;
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.prize-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    position: relative; /* 为了定位水印 */
+    flex: 1 1 calc(50% - 20px); /* 一行两个卡片，留有间隙 */
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s;
+    box-sizing: border-box;
+    max-width: calc(50% - 20px); /* 确保卡片不超过容器宽度 */
+    overflow: hidden; /* 确保水印不会溢出 */
+}
+
+.prize-card:hover {
+    transform: translateY(-5px);
+}
+
+.prize-icon {
+    font-size: 24px;
+    margin-right: 15px;
+}
+
+.prize-description {
+    font-size: 16px;
+    color: #333;
+}
+
+.watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 50px;
+    color: rgba(254, 214, 227, 0.3); /* 使用线性渐变的颜色，调整透明度 */
+    pointer-events: none; /* 确保水印不会影响其他元素的交互 */
+    white-space: nowrap; /* 确保数字不会换行 */
+}
+
+.log-container {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 800px;
+    overflow: auto;
+    box-sizing: border-box;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #efefef; 
+    color: #333;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #fcccc8;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #e55b50;
+}
+
+.pagination {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.page-link {
+    display: inline-block;
+    margin: 0 5px;
+    padding: 5px 10px;
+    background-color: #ff6f61;
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.page-link.active {
+    background-color: #e55b50;
+}
+
+.page-link:hover {
+    background-color: #e55b50;
+}
+
+@media (max-width: 600px) {
+    body {
+        font-size: 13px;
+    }
+
+    #avatar {
+        width: 100px;
+        height: 100px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    #startButton {
+        padding: 10px 20px;
+        font-size: 13px;
+    }
+
+    .prize-card {
+        width: calc(50% - 10px); /* 调整为50%宽度 */
+        max-width: calc(50% - 10px); /* 确保卡片不超过容器宽度 */
+        flex: 1 1 calc(50% - 10px); /* 确保卡片占满容器宽度 */
+    }
+
+    .prize-icon {
+        font-size: 20px;
+    }
+
+    .prize-description {
+        font-size: 14px;
+    }
+
+    .watermark {
+        font-size: 40px;
+    }
+
+    .log-container {
+        width: 100%;
+        padding: 10px; /* 减少内边距以适应小屏幕 */
+    }
+
+    table, th, td {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    button {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+}
